@@ -9,12 +9,12 @@ import Foundation
 import SwiftUI
 
 struct PhotosGalleryView: View {
-    @StateObject var photoDownloadViewModel = PhotoDownloadViewModel()
+    @StateObject var photoDataDownloadViewModel = PhotoDataDownloadViewModel()
     
     var body: some View {
         ScrollView {
-            ForEach(photoDownloadViewModel.photoModels) { model in
-                Text(model.author)
+            ForEach(photoDataDownloadViewModel.photoModels) { model in
+                GallerySingleImageView(urlString: model.downloadURL)
             }
         }
     }

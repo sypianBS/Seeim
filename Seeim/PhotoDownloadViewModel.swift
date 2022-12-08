@@ -2,22 +2,41 @@
 //  PhotoDownloadViewModel.swift
 //  Seeim
 //
-//  Created by Beniamin on 06.12.22.
+//  Created by Beniamin on 08.12.22.
 //
 
 import Foundation
+import UIKit
 import Combine
 
 class PhotoDownloadViewModel: ObservableObject {
-    @Published var photoModels: [PhotoModel] = []
-    let photoDownloadService = PhotoDownloadService.shared
-    private var cancellables: Set<AnyCancellable> = []
     
-    init() {
-        photoDownloadService.downloadPhotosData()
+    @Published var photo: UIImage? = nil
+    @Published var isLoading = false
+    
+    private var cancellables: Set<AnyCancellable> = []
+    let urlString: String
+    
+    init(urlString: String) {
+        self.urlString = urlString
+        self.downloadPhoto()
+    }
+    
+    func downloadPhoto() {
+        isLoading = true
+        guard let url = URL(string: urlString) else {
+            isLoading = false
+            print("error")
+            return
+        }
         
-        photoDownloadService.$photoModels.sink { photoModels in
-            self.photoModels = photoModels
-        }.store(in: &cancellables)
+        URLSession.shared.dataTaskPublisher(for: url)
+            .map { UIImage(data: $0.data) }
+            .receive(on: DispatchQueue.main)
+            .sink { [weak self] (_) in
+                self?.isLoading = false
+            } receiveValue: { [weak self] photo in
+                self?.photo = photo
+            }.store(in: &cancellables)
     }
 }
