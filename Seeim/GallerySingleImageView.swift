@@ -24,6 +24,7 @@ struct GallerySingleImageView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 200)
+                    .cornerRadius(10)
             }
         }
     }

@@ -11,10 +11,17 @@ import SwiftUI
 struct PhotosGalleryView: View {
     @StateObject var photoDataDownloadViewModel = PhotoDataDownloadViewModel()
     
+    let columns = [
+        GridItem(.flexible()),
+        GridItem(.flexible())
+    ]
+    
     var body: some View {
         ScrollView {
-            ForEach(photoDataDownloadViewModel.photoModels) { model in
-                GallerySingleImageView(urlString: model.downloadURL)
+            LazyVGrid(columns: columns, spacing: 20) {
+                ForEach(photoDataDownloadViewModel.photoModels) { model in
+                    GallerySingleImageView(urlString: model.downloadURL)
+                }
             }
         }
     }
