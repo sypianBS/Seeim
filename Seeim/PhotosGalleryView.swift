@@ -22,7 +22,11 @@ struct PhotosGalleryView: View {
                 ForEach(photoDataDownloadViewModel.photoModels) { model in
                     GallerySingleImageView(urlString: model.downloadURL)
                 }
-            }
+            }.padding(.horizontal, 32)
+        }.background {
+            Color.yellow
+                .opacity(0.3)
+                .ignoresSafeArea()
         }
     }
 }

@@ -24,7 +24,11 @@ struct GallerySingleImageView: View {
                     .resizable()
                     .aspectRatio(contentMode: .fit)
                     .frame(height: 200)
-                    .cornerRadius(10)
+                    .clipShape(RoundedRectangle(cornerRadius: 10))
+                    .overlay(
+                        RoundedRectangle(cornerRadius: 10)
+                            .stroke(Color.black, lineWidth: 1)
+                    )
             }
         }
     }
