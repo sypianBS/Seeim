@@ -24,11 +24,17 @@ class PhotoDownloadViewModel: ObservableObject {
     
     func downloadPhoto() {
         isLoading = true
-        guard let url = URL(string: urlString) else {
+        guard var url = URL(string: urlString) else {
             isLoading = false
             print("error")
             return
         }
+        
+        //replace default requested image size with 200x300 so that the server returns us the smaller versions to be used as thumbnails
+        url.deleteLastPathComponent()
+        url.deleteLastPathComponent()
+        url.appendPathComponent("200")
+        url.appendPathComponent("300")
         
         URLSession.shared.dataTaskPublisher(for: url)
             .map { UIImage(data: $0.data) }

@@ -22,7 +22,8 @@ struct GallerySingleImageView: View {
             } else if let photo = photoDownloadViewModel.photo {
                 Image(uiImage: photo)
                     .resizable()
-                    .frame(height: 100)
+                    .aspectRatio(contentMode: .fit)
+                    .frame(height: 200)
             }
         }
     }
