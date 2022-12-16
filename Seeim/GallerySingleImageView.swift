@@ -19,6 +19,7 @@ struct GallerySingleImageView: View {
         ZStack {
             if photoDownloadViewModel.isLoading {
                 ProgressView()
+                    .frame(height: 200) //same size as the image to ensure only images to be currently shown on the screen are downloaded
             } else if let photo = photoDownloadViewModel.photo {
                 Image(uiImage: photo)
                     .resizable()

@@ -16,7 +16,7 @@ class PhotoDownloadViewModel: ObservableObject {
     
     private var cancellables: Set<AnyCancellable> = []
     let urlString: String
-    
+     
     init(urlString: String) {
         self.urlString = urlString
         self.downloadPhoto()
@@ -29,7 +29,7 @@ class PhotoDownloadViewModel: ObservableObject {
             print("error")
             return
         }
-        
+        print("download photo")
         //replace default requested image size with 200x300 so that the server returns us the smaller versions to be used as thumbnails
         url.deleteLastPathComponent()
         url.deleteLastPathComponent()
