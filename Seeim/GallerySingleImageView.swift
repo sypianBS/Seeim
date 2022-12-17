@@ -10,6 +10,7 @@ import SwiftUI
 
 struct GallerySingleImageView: View {
     @StateObject var photoDownloadViewModel: PhotoDownloadViewModel
+    @State private var showSheet: Bool = false
     
     init(urlString: String) {
         _photoDownloadViewModel = StateObject(wrappedValue: PhotoDownloadViewModel(urlString: urlString))
@@ -29,8 +30,13 @@ struct GallerySingleImageView: View {
                     .overlay(
                         RoundedRectangle(cornerRadius: 10)
                             .stroke(Color.black, lineWidth: 1)
-                    )
+                    ).onTapGesture {
+                        print(photoDownloadViewModel.urlString)
+                        showSheet = true
+                    }
             }
+        }.sheet(isPresented: $showSheet, onDismiss: nil) {
+            PhotoFullView().environmentObject(photoDownloadViewModel)
         }
     }
 }

@@ -12,6 +12,7 @@ import Combine
 class PhotoDownloadViewModel: ObservableObject {
     
     @Published var photo: UIImage? = nil
+    @Published var fullSizedPhoto: UIImage? = nil
     @Published var isLoading = false
     
     private var cancellables: Set<AnyCancellable> = []
@@ -19,10 +20,10 @@ class PhotoDownloadViewModel: ObservableObject {
      
     init(urlString: String) {
         self.urlString = urlString
-        self.downloadPhoto()
+        self.downloadPhoto(fullSized: false)
     }
     
-    func downloadPhoto() {
+    func downloadPhoto(fullSized: Bool) {
         isLoading = true
         guard var url = URL(string: urlString) else {
             isLoading = false
@@ -31,18 +32,23 @@ class PhotoDownloadViewModel: ObservableObject {
         }
         print("download photo")
         //replace default requested image size with 200x300 so that the server returns us the smaller versions to be used as thumbnails
-        url.deleteLastPathComponent()
-        url.deleteLastPathComponent()
-        url.appendPathComponent("200")
-        url.appendPathComponent("300")
-        
+        if !fullSized {
+            url.deleteLastPathComponent()
+            url.deleteLastPathComponent()
+            url.appendPathComponent("200")
+            url.appendPathComponent("300")
+        }
         URLSession.shared.dataTaskPublisher(for: url)
             .map { UIImage(data: $0.data) }
             .receive(on: DispatchQueue.main)
             .sink { [weak self] (_) in
                 self?.isLoading = false
             } receiveValue: { [weak self] photo in
-                self?.photo = photo
+                if !fullSized {
+                    self?.photo = photo
+                } else {
+                    self?.fullSizedPhoto = photo
+                }
             }.store(in: &cancellables)
     }
 }
