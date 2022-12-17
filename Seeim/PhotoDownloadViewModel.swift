@@ -14,9 +14,12 @@ class PhotoDownloadViewModel: ObservableObject {
     @Published var photo: UIImage? = nil
     @Published var fullSizedPhoto: UIImage? = nil
     @Published var isLoading = false
+    @Published var photoClassification: String? = nil
     
     private var cancellables: Set<AnyCancellable> = []
     let urlString: String
+    let numberOfPredictionsToShow = 1
+    let imagePredictor = ImagePredictor()
      
     init(urlString: String) {
         self.urlString = urlString
@@ -51,4 +54,41 @@ class PhotoDownloadViewModel: ObservableObject {
                 }
             }.store(in: &cancellables)
     }
+    
+    func classifyImage() {
+        guard let photo = fullSizedPhoto else {
+            self.photoClassification = "Photo is missing" //should not happen
+            return
+        }
+        do {
+            try self.imagePredictor.makePredictions(for: photo,
+                                                    completionHandler: imagePredictionHandler)
+        } catch {
+            self.photoClassification = "Can't classify the photo"
+            print("Vision was unable to make a prediction...\n\n\(error.localizedDescription)")
+        }
+    }
+    
+    private func imagePredictionHandler(_ predictions: [ImagePredictor.Prediction]?) {
+        guard let predictions = predictions else {
+            return
+        }
+       
+        let formattedPredictions = formatPredictions(predictions)
+
+        let predictionString = formattedPredictions.joined(separator: "\n")
+        DispatchQueue.main.async {
+            self.photoClassification = predictionString
+        }
+    }
+    
+    private func formatPredictions(_ predictions: [ImagePredictor.Prediction]) -> [String] {
+        // Vision sorts the classifications in descending confidence order.
+        let topPredictions: [String] = predictions.prefix(numberOfPredictionsToShow).map { prediction in
+            let name = prediction.classification
+            return "\(name) - \(prediction.confidencePercentage)%"
+        }
+        return topPredictions
+    }
+
 }
