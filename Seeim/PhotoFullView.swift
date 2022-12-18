@@ -16,10 +16,21 @@ struct PhotoFullView: View {
                 ProgressView()
                     .frame(height: 200) //same size as the image to ensure only images to be currently shown on the screen are downloaded
             } else if let photo = photoDownloadViewModel.fullSizedPhoto {
-                Image(uiImage: photo)
-                    .resizable()
-                    .aspectRatio(contentMode: .fit)
-                
+                VStack {
+                    Button {
+                        DispatchQueue.global(qos: .userInitiated).async {
+                            photoDownloadViewModel.classifyImage()
+                        }
+                    } label: {
+                        Text("Classify photo")
+                    }
+                    
+                    Text(photoDownloadViewModel.photoClassification ?? "")
+
+                    Image(uiImage: photo)
+                        .resizable()
+                        .aspectRatio(contentMode: .fit)
+                }
             }
         }.onAppear {
             photoDownloadViewModel.downloadPhoto(fullSized: true)
