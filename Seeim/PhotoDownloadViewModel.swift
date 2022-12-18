@@ -51,6 +51,7 @@ class PhotoDownloadViewModel: ObservableObject {
                     self?.photo = photo
                 } else {
                     self?.fullSizedPhoto = photo
+                    self?.classifyImage()
                 }
             }.store(in: &cancellables)
     }
