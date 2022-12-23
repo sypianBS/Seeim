@@ -13,31 +13,30 @@ struct PhotosGalleryView: View {
     
     let columns = [
         GridItem(.flexible()),
+        GridItem(.flexible()),
+        GridItem(.flexible()),
         GridItem(.flexible())
     ]
     
     var body: some View {
+        GeometryReader { geo in
         VStack(spacing: 0) {
             Text("Seeim")
                 .font(.system(size: 36, weight: .semibold, design: .serif))
-                .foregroundColor(Color.init(red: 143/255, green: 0/255, blue: 255/255))
+                .foregroundColor(.black)
                 .frame(maxWidth: .infinity)
                 .padding(.bottom, 8)
-                .background {
-                    Color.yellow
-                        .opacity(0.6)
-                        .ignoresSafeArea()
-                }
             ScrollView {
-                Spacer()
-                    .frame(height: 8)
-                LazyVGrid(columns: columns, spacing: 20) {
-                    ForEach(photoDataDownloadViewModel.photoModels) { model in
-                        GallerySingleImageView(urlString: model.downloadURL)
+                    Spacer()
+                        .frame(height: 8)
+                    LazyVGrid(columns: columns, spacing: 8) {
+                        ForEach(photoDataDownloadViewModel.photoModels) { model in
+                            GallerySingleImageView(urlString: model.downloadURL, width: geo.size.width / 4 - 8 )
+                        }
                     }
-                }.padding(.horizontal, 32)
+                }.padding(.horizontal, 16)
             }.background {
-                Color.yellow
+                Color.gray
                     .opacity(0.3)
                     .ignoresSafeArea()
             }
