@@ -50,6 +50,42 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C38CC05A2955934000900BF0 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				C390D91D294265DE00430BDE /* GallerySingleImageView.swift */,
+				C390D909293FCAEE00430BDE /* ContentView.swift */,
+				C3E1136A294DEB07009939C8 /* PhotoFullView.swift */,
+				C390D919293FD04B00430BDE /* PhotosGalleryView.swift */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		C38CC05B2955937100900BF0 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				C390D91B293FD0F600430BDE /* PhotoModel.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		C38CC05C2955938700900BF0 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				C390D915293FCFBC00430BDE /* PhotoDataDownloadViewModel.swift */,
+				C390D91F2942684200430BDE /* PhotoDownloadViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+		C38CC05D295593B300900BF0 /* Service */ = {
+			isa = PBXGroup;
+			children = (
+				C390D917293FCFCB00430BDE /* PhotoDownloadService.swift */,
+			);
+			path = Service;
+			sourceTree = "<group>";
+		};
 		C390D8FB293FCAED00430BDE = {
 			isa = PBXGroup;
 			children = (
@@ -69,19 +105,15 @@
 		C390D906293FCAEE00430BDE /* Seeim */ = {
 			isa = PBXGroup;
 			children = (
-				C3E11393294E26BF009939C8 /* MLmodel */,
 				C390D907293FCAEE00430BDE /* SeeimApp.swift */,
-				C390D909293FCAEE00430BDE /* ContentView.swift */,
-				C390D915293FCFBC00430BDE /* PhotoDataDownloadViewModel.swift */,
-				C390D917293FCFCB00430BDE /* PhotoDownloadService.swift */,
-				C390D919293FD04B00430BDE /* PhotosGalleryView.swift */,
-				C390D91B293FD0F600430BDE /* PhotoModel.swift */,
+				C3E11391294E2643009939C8 /* ImagePredictor.swift */,
+				C38CC05A2955934000900BF0 /* View */,
+				C38CC05C2955938700900BF0 /* ViewModel */,
+				C38CC05D295593B300900BF0 /* Service */,
+				C38CC05B2955937100900BF0 /* Model */,
+				C3E11393294E26BF009939C8 /* MLmodel */,
 				C390D90B293FCB0100430BDE /* Assets.xcassets */,
 				C390D90D293FCB0100430BDE /* Preview Content */,
-				C390D91D294265DE00430BDE /* GallerySingleImageView.swift */,
-				C390D91F2942684200430BDE /* PhotoDownloadViewModel.swift */,
-				C3E1136A294DEB07009939C8 /* PhotoFullView.swift */,
-				C3E11391294E2643009939C8 /* ImagePredictor.swift */,
 			);
 			path = Seeim;
 			sourceTree = "<group>";
