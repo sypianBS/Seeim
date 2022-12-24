@@ -27,6 +27,12 @@ class PhotoDownloadViewModel: ObservableObject {
     }
     
     func downloadPhoto(fullSized: Bool) {
+        //check if image is cached - if yes, get it and return
+        if let cachedPhoto = PhotoCache.shared.get(key: urlString) {
+            self.fullSizedPhoto = cachedPhoto
+            return
+        }
+        
         isLoading = true
         guard var url = URL(string: urlString) else {
             isLoading = false
@@ -41,6 +47,7 @@ class PhotoDownloadViewModel: ObservableObject {
             url.appendPathComponent("200")
             url.appendPathComponent("300")
         }
+              
         URLSession.shared.dataTaskPublisher(for: url)
             .map { UIImage(data: $0.data) }
             .receive(on: DispatchQueue.main)
@@ -50,8 +57,12 @@ class PhotoDownloadViewModel: ObservableObject {
                 if !fullSized {
                     self?.photo = photo
                 } else {
-                    self?.fullSizedPhoto = photo
-                    self?.classifyImage()
+                    guard let self = self, let photo = photo else {
+                        return
+                    }
+                    self.fullSizedPhoto = photo
+                    PhotoCache.shared.add(key: self.urlString, value: photo)
+                    self.classifyImage()
                 }
             }.store(in: &cancellables)
     }

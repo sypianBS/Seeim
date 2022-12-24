@@ -17,6 +17,7 @@
 		C390D91C293FD0F600430BDE /* PhotoModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390D91B293FD0F600430BDE /* PhotoModel.swift */; };
 		C390D91E294265DE00430BDE /* GallerySingleImageView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390D91D294265DE00430BDE /* GallerySingleImageView.swift */; };
 		C390D9202942684200430BDE /* PhotoDownloadViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = C390D91F2942684200430BDE /* PhotoDownloadViewModel.swift */; };
+		C3DB00C92956D8DB00887775 /* PhotoCache.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3DB00C82956D8DB00887775 /* PhotoCache.swift */; };
 		C3E1136B294DEB07009939C8 /* PhotoFullView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E1136A294DEB07009939C8 /* PhotoFullView.swift */; };
 		C3E11392294E2643009939C8 /* ImagePredictor.swift in Sources */ = {isa = PBXBuildFile; fileRef = C3E11391294E2643009939C8 /* ImagePredictor.swift */; };
 		C3E11395294E26CC009939C8 /* MobileNetV2.mlmodel in Sources */ = {isa = PBXBuildFile; fileRef = C3E11394294E26CC009939C8 /* MobileNetV2.mlmodel */; };
@@ -34,6 +35,7 @@
 		C390D91B293FD0F600430BDE /* PhotoModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoModel.swift; sourceTree = "<group>"; };
 		C390D91D294265DE00430BDE /* GallerySingleImageView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GallerySingleImageView.swift; sourceTree = "<group>"; };
 		C390D91F2942684200430BDE /* PhotoDownloadViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoDownloadViewModel.swift; sourceTree = "<group>"; };
+		C3DB00C82956D8DB00887775 /* PhotoCache.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCache.swift; sourceTree = "<group>"; };
 		C3E1136A294DEB07009939C8 /* PhotoFullView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoFullView.swift; sourceTree = "<group>"; };
 		C3E11391294E2643009939C8 /* ImagePredictor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImagePredictor.swift; sourceTree = "<group>"; };
 		C3E11394294E26CC009939C8 /* MobileNetV2.mlmodel */ = {isa = PBXFileReference; lastKnownFileType = file.mlmodel; path = MobileNetV2.mlmodel; sourceTree = "<group>"; };
@@ -111,6 +113,7 @@
 				C38CC05C2955938700900BF0 /* ViewModel */,
 				C38CC05D295593B300900BF0 /* Service */,
 				C38CC05B2955937100900BF0 /* Model */,
+				C3DB00CA2956EA0E00887775 /* Cache */,
 				C3E11393294E26BF009939C8 /* MLmodel */,
 				C390D90B293FCB0100430BDE /* Assets.xcassets */,
 				C390D90D293FCB0100430BDE /* Preview Content */,
@@ -124,6 +127,14 @@
 				C390D90E293FCB0100430BDE /* Preview Assets.xcassets */,
 			);
 			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C3DB00CA2956EA0E00887775 /* Cache */ = {
+			isa = PBXGroup;
+			children = (
+				C3DB00C82956D8DB00887775 /* PhotoCache.swift */,
+			);
+			path = Cache;
 			sourceTree = "<group>";
 		};
 		C3E11393294E26BF009939C8 /* MLmodel */ = {
@@ -204,6 +215,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C3DB00C92956D8DB00887775 /* PhotoCache.swift in Sources */,
 				C390D91E294265DE00430BDE /* GallerySingleImageView.swift in Sources */,
 				C390D91C293FD0F600430BDE /* PhotoModel.swift in Sources */,
 				C390D90A293FCAEE00430BDE /* ContentView.swift in Sources */,
