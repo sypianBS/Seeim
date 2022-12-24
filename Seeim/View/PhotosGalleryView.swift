@@ -25,6 +25,10 @@ struct PhotosGalleryView: View {
                 .font(.system(size: 36, weight: .semibold, design: .serif))
                 .foregroundColor(.black)
                 .frame(maxWidth: .infinity)
+                .padding(.bottom, 4)
+            Rectangle()
+                .frame(height: 1)
+                .padding(.horizontal, 16)
                 .padding(.bottom, 8)
             ScrollView {
                     Spacer()
@@ -37,7 +41,7 @@ struct PhotosGalleryView: View {
                 }.padding(.horizontal, 16)
             }.background {
                 Color.gray
-                    .opacity(0.3)
+                    .opacity(0.2)
                     .ignoresSafeArea()
             }
         }
